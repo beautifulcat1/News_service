@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入 jQuery Mobile 样式 -->
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+
+<!-- 引入 jQuery 库 -->
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- 引入 jQuery Mobile 库 -->
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <button id="sub_btn" style="margin-top: 4px;float: right;">发表评论</button>
+    <script>
+        // 根据地址获取评论的函数
+                function getdata() {
+                    var address = "https://3g.163.com/money/article/G5BCQT5S002580S6.html"
+                    var comments = $("#input_kw").val()
+                    // alert(comments)
+                    $.ajax({
+                        url: "http://localhost:5000/getcomments",
+                        dataType: "json",
+                        data: {
+                            address: address,
+                            comments: comments
+                        },
+                        jsnop: "callback",
+                        crossDomain: true,
+                        async: true,
+                        success: function (data) {
+        
+                            $(".comment_list").html("")
+                            if (data[0].success === '成功') {
+                                for (let i = 1; i < data.length; i++) {
+                                    var str = `        <div class="comment_items">
+                                                            ${data[i].comments}
+                                                         
+                                                            </div>`
+                                    // data[i].comments
+                                    // console.log(str)
+                                    $(".comment_list").append(str)
+                                }
+                            }
+        
+                        }
+        
+                    })
+                }
+        
+        
+                $(function () {
+                    getdata()
+                    $("#sub_btn").on("click", function () {
+                        getdata()
+                        alert("hellow")
+                    })
+                })
+            </script>
+</body>
+
+</html>

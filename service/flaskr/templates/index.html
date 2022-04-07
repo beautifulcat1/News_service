@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <style type="text/css">
+        body {
+            margin-left: 12px;
+            margin-right: 12px;
+        }
+
+        .comment_box {
+            height: 1000px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        .comment_box .comment_list {
+            height: 400px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+
+        }
+
+        .comment_box .comment_list .comment_list_default {
+            text-align: center;
+            font-size: 2em;
+        }
+
+        .comment_box .comment_list .comment_items {
+            margin-top: 5px;
+            margin-bottom: px;
+            border-bottom: ridge
+        }
+    </style>
+</head>
+
+<body><div class="article-content">
+<div class="head">
+<h1 class="title">收评：沪指三连阴跌0.58% 军工、金融板块走低</h1>
+<div class="info">
+<span class="time js-time">2021-05-21 15:06:28</span>
+<a class="source source-sub" href="//3g.163.com/news/sub/T1428648190649.html">网易财经</a>
+</div>
+</div>
+<div class="content">
+<div class="page js-page on">
+<p><!--@@stock=0000001--></p><p><b>网易财经5月21日讯</b>  A股三大指数今早集体高开，之后弱势调整，<a href="https://news.163.com/news/search?keyword=%E5%88%9B%E4%B8%9A%E6%9D%BF%E6%8C%87">创业板指</a>一度跌逾1%，不过周期股回暖。午后，两市一度冲高，但上攻乏力，随后跌幅扩大。</p><p>截止收盘，<a href="https://news.163.com/news/search?keyword=%E6%B2%AA%E6%8C%87">沪指</a>跌0.58%，报3486.64点；深证成指跌0.81%，报14417.46点；创业板指跌0.97%，报3113.26点。</p><p>板块方面：造纸、种植业、电力、旅游、煤炭、钢铁等板块涨幅居前，生物制品、国防军工、券商、银行、新冠检测等板块跌幅居前。</p><p>截止15:00，北向资金净流出5.78亿元，沪股通净流出20.72亿元，深股通净流入14.94亿元。</p><p>国盛证券研报认为，技术上沪指延续上行通道上行，再次接近高点后开始震荡，但市场并未出现恐慌性情绪，后市仍需等待进一步企稳。操作上，宜轻指数、重结构，偏成长，总体看A股筑底成功后快速脱离底部，但上方面临压力，市场短线机会还在于事件刺激，对反弹遇阻的个股可以适当减仓；中期逢低关注确定性较强的机构重仓白马为主。</p><p>安信证券首席策略师陈果5月20日表示，广义上而言今年全年都将是一个偏震荡的环境，二季度市场仍存震荡风险，无论是从流动性的预期还是风险偏好角度来说，其对估值的容忍度较高；但是往后看，更倾向于下半年市场还会出现一波比较明显的、与流动性预期相关的回撤，不过在大的震荡环境中，一些业绩高增长的领域或出现相对较强的结构性行情。</p><p>中金公司研报认为，近期主要类别的资产价格波动出现了一些值得注意的进展：中国股市调整后有见底趋势，同时股票风格偏向成长，债市收益率下行；比特币大跌，商品波动加大，黄金已悄然反弹，美股波动加大。市场则依然在担心通胀或“滞胀”。前期我们重申“调整尾声，重回成长”的观点，并强调周期的行情波动加大，建议“轻指数、重结构、偏成长”。</p><p>国泰君安表示，震荡仍是大格局，应把握先胀后滞节奏下的三大结构切换机会。行业配置上，一是续享碳中和，应从全球定价的原材料向国内“碳中和”周期切换；二是紧抓制造红利，汽车、家电等超跌行业将得到修复；三是，布局科技成长。</p>
+<div class="otitle_editor">
+<p class="editor">(责任编辑：杨倩_NF4425)</p>
+</div>
+</div>
+</div>
+</div> <div class="comment_box">
+        <div>
+            <p style="font-size:2em"><b>评论区</b></p>
+            <textarea id="input_kw" style="width: 100%;height: 66px;" type="text"></textarea>
+            <button id="sub_btn" style="margin-top: 4px;float: right;">发表评论</button>
+        </div>
+
+        <div class="comment_list">
+            没有什么显示的
+            <!-- <div class="comment_list_default">
+                
+            </div>    -->
+        </div>
+    </div>
+    <script>
+// 根据地址获取评论的函数
+        function getdata() {
+            var address = "https://3g.163.com/money/article/GAHGAPU500258152.html"
+            var comments = $("#input_kw").val()
+            // alert(comments)
+            $.ajax({
+                url: "http://192.168.0.106:5000/getcomments",
+                dataType: "json",
+                data: {
+                    address: address,
+                    comments: comments
+                },
+                success: function (data) {
+
+                    $(".comment_list").html("")
+                    if (data[0].success === '成功') {
+                        for (let i = 1; i < data.length; i++) {
+                            var str = `        <div class="comment_items">
+                                                    ${data[i].comments}
+                                                 
+                                                    </div>`
+                            // data[i].comments
+                            // console.log(str)
+                            $(".comment_list").append(str)
+                        }
+                    }
+
+                }
+
+            })
+        }
+
+
+        $(function () {
+            getdata()
+            $("#sub_btn").on("click", function () {
+                getdata()
+            })
+        })
+    </script>
+</body>
+
+
+
+</html>
